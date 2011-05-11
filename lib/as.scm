@@ -13,4 +13,8 @@
   (aload "arc.arc")
   (aload "libs.arc"))
 
-(tl)
+(let ((args (vector->list (current-command-line-arguments))))
+  (if (null? args)
+      (tl)
+      (begin (xdef args* args)
+             (aload (car args)))))
