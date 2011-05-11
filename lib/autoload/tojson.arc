@@ -1,3 +1,5 @@
+(require "autoload/between.arc")
+
 (def 4hex (i)
   (let s (coerce i 'string 16)
     (string (n-of (- 4 (len s)) #\0) s)))
