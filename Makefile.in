@@ -23,9 +23,10 @@ clean:
 	rm -rf *~ $(arcbin)
 
 install: $(prog)
-	mkdir -p $(bindir) $(libdir)
-	cp $(arcbin) $(bindir)/$(prog)
-	cp -r $(arclib) $(libdir)/$(prog)
+	mkdir -p $(bindir)
+	cp -rTv $(arcbin) $(bindir)/$(prog)
+	mkdir -p $(libdir)
+	cp -rTv $(arclib) $(libdir)/$(prog)
 
 uninstall:
 	rm -rf $(bindir)/$(prog)
