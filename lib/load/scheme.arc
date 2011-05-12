@@ -1,4 +1,4 @@
-(require "autoload/extend.arc")
+(require "load/extend.arc")
 
 (extend ac (s env) (and (errsafe:acons s) (is (car s) 'scheme))
   `(begin ,@(cdr s)))

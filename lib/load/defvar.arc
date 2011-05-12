@@ -1,5 +1,5 @@
-(require "autoload/redef.arc")
-(require "autoload/scheme.arc")
+(require "load/redef.arc")
+(require "load/scheme.arc")
 
 (= defined-variables* (table))
 

@@ -1,5 +1,5 @@
-(require "autoload/redef.arc")
-(require "autoload/xloop.arc")
+(require "load/redef.arc")
+(require "load/xloop.arc")
 
 (redef readline ((o s (stdin)))
   (aif (readc s)

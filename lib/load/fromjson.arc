@@ -1,4 +1,4 @@
-(require "autoload/match.arc")
+(require "load/match.arc")
 
 (def json-true ()
   (mliteral "true" t))

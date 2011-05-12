@@ -1,4 +1,4 @@
-(require "autoload/parameter.arc")
+(require "load/parameter.arc")
 
 (assign dynamic-parameter* (table))
 

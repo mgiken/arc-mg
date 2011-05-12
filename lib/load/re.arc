@@ -1,4 +1,4 @@
-(require "autoload/scheme.arc")
+(require "load/scheme.arc")
 
 (def re-match-pat (pat str)
   (ac-niltree (scheme.regexp-match (scheme.pregexp pat) str)))

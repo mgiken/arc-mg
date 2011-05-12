@@ -1443,7 +1443,7 @@
 )
 
 (= arclib*   (env "ARCLIB")
-   loadpath* (list "." (string arclib* "autoload") (string arclib* "site")))
+   loadpath* (list "." (string arclib* "load") (string arclib* "site")))
 
 (def push-loadpath (path)
   (let first pop.loadpath*

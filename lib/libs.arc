@@ -8,5 +8,5 @@
 
 (defmemo require (f) load.f)
 
-(let d "autoload"
+(let d "load"
   (map [require:+ d "/" _] dir.d))

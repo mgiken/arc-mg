@@ -1,5 +1,5 @@
-(require "autoload/redef.arc")
-(require "autoload/scheme.arc")
+(require "load/redef.arc")
+(require "load/scheme.arc")
 
 (def bytehex (i)
   (if (< i 16) (writec #\0))
