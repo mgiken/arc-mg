@@ -1021,14 +1021,16 @@
 ; the 2050 means http requests currently capped at 2 meg
 ; http://list.cs.brown.edu/pipermail/plt-scheme/2005-August/009414.html
 
-(xdef socket-accept (lambda (s)
+(xdef socket-accept (lambda (s . lim)
                       (let ((oc (current-custodian))
                             (nc (make-custodian)))
                         (current-custodian nc)
                         (call-with-values
                          (lambda () (tcp-accept s))
                          (lambda (in out)
-                           (let ((in1 (make-limited-input-port in 100000 #t)))
+                           (let ((in1 (if (null? lim)
+                                          in
+                                          (make-limited-input-port in (car lim) #t))))
                              (current-custodian oc)
                              (associate-custodian nc in1 out)
                              (list in1
