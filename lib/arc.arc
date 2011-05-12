@@ -1442,8 +1442,26 @@
        (pr ,@(parse-format str))))
 )
 
+(= arclib*   (env "ARCLIB")
+   loadpath* (list "." (string arclib* "autoload") (string arclib* "site")))
+
+(def push-loadpath (path)
+  (let first pop.loadpath*
+    (pushnew path loadpath*)
+    (pushnew first loadpath*)))
+
+(def pull-loadpath (path)
+  (pull testify.path loadpath*))
+
+(def findlib (file)
+  (aif (is file.0 #\/)
+       file
+       (find [file-exists:string _ "/" file] loadpath*)
+       (string it "/" file)
+       (err "Not found" file)))
+
 (def load (file)
-  (w/infile f file
+  (w/infile f findlib.file
     (w/uniq eof
       (whiler e (read f eof) eof
         (eval e)))))
