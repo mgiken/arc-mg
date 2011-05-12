@@ -1,6 +1,3 @@
-(require "load/implicit.arc")
-(require "load/ret.arc")
-
 (implicit pos*)
 (implicit fail)
 
