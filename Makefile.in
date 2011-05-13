@@ -8,8 +8,8 @@ srcdir = @srcdir@
 bindir = @bindir@
 libdir = @libdir@
 
-arcsrc = $(srcdir)/bin/$(prg).sh
 scmsrc = $(srcdir)/lib/ac.scm $(srcdir)/lib/brackets.scm
+arcsrc = $(srcdir)/bin/$(prg).sh
 arcbin = $(srcdir)/bin/$(prg)
 arclib = $(srcdir)/lib
 
