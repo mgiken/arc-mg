@@ -1,3 +1,5 @@
+(require "scheme.arc")
+
 ; Matching.  Spun off 29 Jul 06.
 
 ; arc> (tostring (writec (coerce 133 'char)))
@@ -71,13 +73,28 @@
               (++ i 2))
           (writec c)))))
 
-(def urlencode (s)
-  (tostring 
-    (each c s 
-      (writec #\%)
-      (let i (int c)
-        (if (< i 16) (writec #\0))
-        (pr (coerce i 'string 16))))))
+(def bytehex (i)
+  (if (< i 16) (writec #\0))
+  (pr (upcase:coerce i 'string 16)))
+
+(def urlsafe (c)
+  (or alphadig.c (in c #\- #\_ #\. #\~)))
+
+(def charutf8 (c)
+  (scheme (ac-niltree (bytes->list (string->bytes/utf-8 (string c))))))
+
+; redef isn't what I want, but I can't think of something better now
+
+(def urlencode (s (o urlsafe urlsafe))
+ (tostring
+   (each c s
+     (if (is c #\space)
+          (pr #\+)
+         urlsafe.c
+          (pr c)
+          (each i charutf8.c
+            (writec #\%)
+            (bytehex i))))))
 
 (mac litmatch (pat string (o start 0))
   (w/uniq (gstring gstart)
@@ -127,6 +144,10 @@
 (def begins (seq pat (o start 0))
   (unless (len> pat (- (len seq) start))
     (headmatch pat seq start)))
+
+(def begins-rest (pattern s)
+  (if (begins s pattern)
+      (cut s (len pattern))))
 
 (def subst (new old seq)
   (let boundary (+ (- (len seq) (len old)) 1)
