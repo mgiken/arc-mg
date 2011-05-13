@@ -1,4 +1,4 @@
-(require "scheme.arc")
+(require "load/scheme.arc")
 
 ; Matching.  Spun off 29 Jul 06.
 
