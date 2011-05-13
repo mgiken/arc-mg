@@ -1,4 +1,5 @@
 prog = arc
+ver  = @PACKAGE_VERSION@
 
 prefix      = @prefix@
 exec_prefix = @exec_prefix@
@@ -8,6 +9,7 @@ bindir = @bindir@
 libdir = @libdir@
 
 arcsrc = $(srcdir)/bin/$(prog).sh
+scmsrc = $(srcdir)/lib/ac.scm $(srcdir)/lib/brackets.scm
 arcbin = $(srcdir)/bin/$(prog)
 arclib = $(srcdir)/lib
 
@@ -15,8 +17,10 @@ all: $(prog)
 
 $(prog): $(arcbin)
 
-$(arcbin): $(arcsrc)
-	sed -e 's#.(cd.*/#$(libdir)/arc/#' <$(arcsrc) >$(arcbin)
+$(arcbin): $(arcsrc) $(scmsrc)
+	mzc $(scmsrc)
+	sed -e 's#ARCVER=.*#ARCVER="$(ver)"#' <$(arcsrc) | \
+	sed -e 's#ARCLIB=.*#ARCLIB="$(libdir)/arc"#' >$(arcbin)
 	chmod 755 $(arcbin)
 
 clean:
