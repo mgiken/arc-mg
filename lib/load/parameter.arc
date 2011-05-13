@@ -1,5 +1,5 @@
-(require "autoload/extend.arc")
-(require "autoload/scheme.arc")
+(require "load/extend.arc")
+(require "load/scheme.arc")
 
 (def parameter ((o init))
   (scheme.make-parameter init))

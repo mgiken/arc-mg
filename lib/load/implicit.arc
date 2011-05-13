@@ -1,4 +1,4 @@
-(require "autoload/dynamic.arc")
+(require "load/dynamic.arc")
 
 (mac make-w/ (name)
   (let w/name (sym (+ "w/" name))
