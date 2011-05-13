@@ -1,5 +1,5 @@
-prog = arc
-ver  = @PACKAGE_VERSION@
+prg = arc
+ver = @PACKAGE_VERSION@
 
 prefix      = @prefix@
 exec_prefix = @exec_prefix@
@@ -8,14 +8,14 @@ srcdir = @srcdir@
 bindir = @bindir@
 libdir = @libdir@
 
-arcsrc = $(srcdir)/bin/$(prog).sh
+arcsrc = $(srcdir)/bin/$(prg).sh
 scmsrc = $(srcdir)/lib/ac.scm $(srcdir)/lib/brackets.scm
-arcbin = $(srcdir)/bin/$(prog)
+arcbin = $(srcdir)/bin/$(prg)
 arclib = $(srcdir)/lib
 
-all: $(prog)
+all: $(prg)
 
-$(prog): $(arcbin)
+$(prg): $(arcbin)
 
 $(arcbin): $(arcsrc) $(scmsrc)
 	mzc $(scmsrc)
@@ -26,12 +26,12 @@ $(arcbin): $(arcsrc) $(scmsrc)
 clean:
 	rm -rf *~ $(arcbin)
 
-install: $(prog)
+install: $(prg)
 	mkdir -p $(bindir)
-	cp -rTv $(arcbin) $(bindir)/$(prog)
+	cp -rTv $(arcbin) $(bindir)/$(prg)
 	mkdir -p $(libdir)
-	cp -rTv $(arclib) $(libdir)/$(prog)
+	cp -rTv $(arclib) $(libdir)/$(prg)
 
 uninstall:
-	rm -rf $(bindir)/$(prog)
-	rm -rf $(libdir)/$(prog)
+	rm -rf $(bindir)/$(prg)
+	rm -rf $(libdir)/$(prg)
