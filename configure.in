@@ -1,2 +1,2 @@
-AC_INIT([arc-mg], [3.1-r1])
+AC_INIT([arc-mg], [3.1.1])
 AC_OUTPUT([Makefile])
