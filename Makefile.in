@@ -1,0 +1,38 @@
+prg = arc
+ver = @PACKAGE_VERSION@
+
+prefix      = @prefix@
+exec_prefix = @exec_prefix@
+
+srcdir = @srcdir@
+bindir = @bindir@
+libdir = @libdir@
+
+scmsrc = $(srcdir)/lib/ac.scm $(srcdir)/lib/brackets.scm
+arcsrc = $(srcdir)/bin/$(prg).sh
+arcbin = $(srcdir)/bin/$(prg)
+arclib = $(srcdir)/lib
+
+all: $(prg)
+
+$(prg): $(arcbin)
+
+$(arcbin): $(arcsrc) $(scmsrc)
+	mzc $(scmsrc)
+	sed -e 's#ARCVER=.*#ARCVER="$(ver)"#' <$(arcsrc) | \
+	sed -e 's#PREFIX=.*#PREFIX="$(prefix)"#' | \
+	sed -e 's#ARCLIB=.*#ARCLIB="$(libdir)/arc"#' >$(arcbin)
+	chmod 755 $(arcbin)
+
+clean:
+	rm -rf *~ $(arcbin)
+
+install: $(prg)
+	mkdir -p $(bindir)
+	cp -rTv $(arcbin) $(bindir)/$(prg)
+	mkdir -p $(libdir)
+	cp -rTv $(arclib) $(libdir)/$(prg)
+
+uninstall:
+	rm -rf $(bindir)/$(prg)
+	rm -rf $(libdir)/$(prg)
