@@ -20,6 +20,7 @@ $(prg): $(arcbin)
 $(arcbin): $(arcsrc) $(scmsrc)
 	mzc $(scmsrc)
 	sed -e 's#ARCVER=.*#ARCVER="$(ver)"#' <$(arcsrc) | \
+	sed -e 's#PREFIX=.*#PREFIX="$(prefix)"#' | \
 	sed -e 's#ARCLIB=.*#ARCLIB="$(libdir)/arc"#' >$(arcbin)
 	chmod 755 $(arcbin)
 
