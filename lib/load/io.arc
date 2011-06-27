@@ -1,3 +1,5 @@
+(require "load/scheme.arc")
+
 (scheme:xdef readcs
   (lambda (n . str)
     (let ((cs (read-string n (if (pair? str)
