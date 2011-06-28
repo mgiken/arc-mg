@@ -5,8 +5,8 @@ prefix      = @prefix@
 exec_prefix = @exec_prefix@
 
 srcdir = @srcdir@
-bindir = @bindir@
-libdir = @libdir@
+bindir = $(DESTDIR)@bindir@
+libdir = $(DESTDIR)@libdir@
 
 scmsrc = $(srcdir)/lib/ac.scm $(srcdir)/lib/brackets.scm
 arcsrc = $(srcdir)/bin/$(prg).sh
