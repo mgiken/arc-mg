@@ -1,4 +1,4 @@
 (require "re.arc")
 
-(def escsharg args
+(def escshargs args
   (map [string " '" (re-replace "'" _ "'\\\\''") "'"] args))
