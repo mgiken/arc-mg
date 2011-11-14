@@ -1450,7 +1450,8 @@
   
   (mac prf (str . args)
     `(let ,argsym (list ,@args)
-       (pr ,@(parse-format str))))
+       ;(pr ,@(parse-format str))))
+       (pr ,@(parse-format eval.str))))  ; XXX
 )
 
 (= arclib*   (env "ARCLIB")
