@@ -1,6 +1,8 @@
+(= sendmail* "/usr/sbin/sendmail -t")
+
 (mac mail (msg . args)
   `(withs (,@args)
-    (pipe-to (system "sendmail -t")
+    (pipe-to (system sendmail*)
       (prf ,msg))))
 
 (def sendmail (from to subj msg)
