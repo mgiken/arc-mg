@@ -45,5 +45,5 @@
 
 (mac w/dir (n p d . body)
   `(each ,n (dir ,d)
-     (let ,p (qualified-path ,n)
+     (let ,p (file-join ,d ,n)
        ,@body)))
