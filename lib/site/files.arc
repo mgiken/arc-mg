@@ -42,3 +42,8 @@
 (def qualified-path (path)
   " Returns the fully-qualified path of a possibly relative `path'. "
   (scheme (path->string (simplify-path (path->complete-path path)))))
+
+(mac w/dir (n p d . body)
+  `(each ,n (dir ,d)
+     (let ,p (qualified-path ,n)
+       ,@body)))
