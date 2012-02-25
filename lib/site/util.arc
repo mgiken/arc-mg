@@ -1,6 +1,9 @@
 (def carisa (x type)
     (and acons.x (isa car.x type)))
 
+(mac set-if-nil (x y)
+  `(or ,x (= ,x ,y)))
+
 (mac between (var expr within . body)
   (w/uniq first
     `(let ,first t

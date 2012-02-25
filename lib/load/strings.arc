@@ -238,6 +238,9 @@
 (def plural (n x)
   (string n #\  (pluralize n x)))
 
+(def capitalize (s)
+  (if empty.s s
+     (+ (upcase s.0) (cut s 1))))
 
 ; http://www.eki.ee/letter/chardata.cgi?HTML4=1
 ; http://jrgraphix.net/research/unicode_blocks.php?block=1
