@@ -1622,48 +1622,6 @@
     `(atwiths ,binds
        (or ,val (,setter ,expr)))))
 
-(= vtables* (table))
-(mac defgeneric(name args . body)
-  `(do
-    (or= (vtables* ',name) (table))
-    (def ,name allargs
-      (aif (aand (vtables* ',name) (it (type car.allargs)))
-        (apply it allargs)
-        (aif (pickles* (type car.allargs))
-          (apply ,name (map it allargs))
-          (let ,args allargs
-            ,@body))))))
-
-(mac defmethod(name args type . body)
-  `(= ((vtables* ',name) ',type)
-      (fn ,args
-        ,@body)))
-
-(= pickles* (table))
-(mac pickle(type f)
-  `(= (pickles* ',type)
-      ,f))
-
-($:namespace-undefine-variable! '_iso)
-; Could take n args, but have never once needed that.
-(defgeneric iso(x y)
-  (is x y))
-
-(defmethod iso(x y) cons
-  (and (acons x)
-       (acons y)
-       (iso car.x car.y)
-       (iso cdr.x cdr.y)))
-
-(defmethod iso(x y) table
-  (and (isa x 'table)
-       (isa y 'table)
-       (is (len keys.x) (len keys.y))
-       (all
-         (fn((k v))
-           (iso y.k v))
-         tablist.x)))
-
 (= hooks* (table))
 
 (def hook (name . args)
