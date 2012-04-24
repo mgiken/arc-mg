@@ -1,16 +1,29 @@
-(= tests* nil)
+(mac catcherr body
+  `(on-err idfn (fn () ,@body)))
+
+(def makeerr (msg)
+  (catcherr (err msg)))
+
+(let i 0
 
 (mac test (comp expr expected)
-  (w/uniq (gg gr)
-    `(do (push [withs (,gg ,expr
-                       ,gr (,comp ,gg ,expected))
-                  (unless ,gr (pr "not "))
-                  (pr "ok " ++._ " - " ',expr " => " ,gg)
-                  (unless ,gr (pr ", not the expected result " ,expected))
-                  (prn)]
-               tests*))))
+ `(withs (val (catcherr ,expr)
+          res (,comp val ,expected))
+    (unless res
+      (pr "not "))
+    (pr "ok " ,(++ i) " - ")
+    (write ',expr)
+    (pr " => ")
+    (write val);,expr)
+    (unless res
+      (pr ", not the expected result ")
+      (write ,expected))
+    (prn)))
 
-(def run-test ()
-  (prn "1.." len.tests*)
-  (on f rev.tests* f.index)
-  (wipe tests*))
+(def plan (n)
+  (prn "1.." n))
+
+(def done-testing ((o n i))
+  (plan n))
+
+)
