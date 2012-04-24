@@ -3,16 +3,16 @@
 
 (scheme:namespace-undefine-variable! '_iso)
 ; Could take n args, but have never once needed that.
-(defgeneric iso(x y)
+(defgeneric iso (x y)
   (is x y))
 
-(defmethod iso(x y) cons
+(defmethod iso (x y) cons
   (and (acons x)
        (acons y)
        (iso car.x car.y)
        (iso cdr.x cdr.y)))
 
-(defmethod iso(x y) table
+(defmethod iso (x y) table
   (and (isa x 'table)
        (isa y 'table)
        (is (len keys.x) (len keys.y))
@@ -21,4 +21,7 @@
            (iso y.k v))
          tablist.x)))
 
-
+(defmethod iso (x y) exception
+  (and (isa x 'exception)
+       (isa y 'exception))
+       (is details.x details.y))
