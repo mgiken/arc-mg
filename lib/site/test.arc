@@ -1,22 +1,29 @@
-(= tests* nil)
+(mac catcherr body
+  `(on-err idfn (fn () ,@body)))
 
-;ugly
-(def istab (x y)
-  (let cmp (fn (l r) (> car.l car.r))
-    (iso (sort cmp tablist.x) (sort cmp tablist.y))))
+(def makeerr (msg)
+  (catcherr (err msg)))
 
-(mac test (expr expected (o comp 'is))
-  (w/uniq (gg gr)
-    `(do (push [withs (,gg ,expr
-                       ,gr (,comp ,gg ,expected))
-                 (unless ,gr (pr "not "))
-                 (pr "ok " ++._ " - " ',expr " => " ,gg)
-                 (unless ,gr (pr ", not the expected result " ,expected))
-                 (prn)]
-             tests*)
-       nil)))
+(let i 0
 
-(def run-test ()
-  (prn "1.." len.tests*)
-  (on f rev.tests* f.index)
-  wipe.tests*)
+(mac test (comp expr expected)
+ `(withs (val (catcherr ,expr)
+          res (,comp val ,expected))
+    (unless res
+      (pr "not "))
+    (pr "ok " ,(++ i) " - ")
+    (write ',expr)
+    (pr " => ")
+    (write val);,expr)
+    (unless res
+      (pr ", not the expected result ")
+      (write ,expected))
+    (prn)))
+
+(def plan (n)
+  (prn "1.." n))
+
+(def done-testing ((o n i))
+  (plan n))
+
+)
