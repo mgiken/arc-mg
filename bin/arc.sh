@@ -3,6 +3,7 @@
 export ARCVER="0"
 export PREFIX="$(cd $(dirname $(readlink -f $0))/.. && pwd)"
 export ARCLIB="$PREFIX/lib"
+export LD_LIBRARY_PATH="$ARCLIB/site:$ARCLIB/load:$LD_LIBRARY_PATH"
 
 if [ "$1" = "--show-prefix" ]; then
   echo $PREFIX
