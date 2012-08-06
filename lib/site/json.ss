@@ -33,7 +33,9 @@
            [i (in-naturals)])
        (when (> i 0)
          (display "," port))
-       (fprintf port "\"~a\"" key)
+       (fprintf port "\"~a\"" (cond ((symbol? key) (regexp-replace* #rx"\"" (symbol->string key) "\\\\\""))
+                                    ((string? key) (regexp-replace* #rx"\"" key "\\\\\""))
+                                    (else key)))
        (display ":" port)
        (write-json value port))
      (display "}" port)]
