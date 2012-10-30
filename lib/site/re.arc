@@ -18,14 +18,14 @@
 (extend type (x) (scheme:pregexp? x)
   're)
 
-;(def parse-re-items (port)
-;  (pregexp:accum a
-;    (whiler s (readc port) #\/
-;      (a s)
-;      (when (is s #\\)
-;        (a (readc port))))))
-;
-;(extend-readtable #\/ parse-re-items 'dispatch-macro)
-;
-;(extend ac-literal (x) (errsafe:isa x 're)
-;  scheme-t)
+(def parse-re-items (port)
+  (pregexp:accum a
+    (whiler s (readc port) #\/
+      (a s)
+      (when (is s #\\)
+        (a (readc port))))))
+
+(extend-readtable #\/ parse-re-items 'dispatch-macro)
+
+(extend ac-literal (x) (errsafe:isa x 're)
+  scheme-t)
