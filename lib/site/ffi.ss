@@ -38,7 +38,7 @@
 (xdef cfinalize register-finalizer)
 (xdef gc collect-garbage)
 
-(define (l->cvec l type) (list->cvector (to-prop l) type))
+(define (l->cvec l type) (list->cvector (ar-nil-terminate l) type))
 (xdef l->cvec l->cvec)
 (xdef acptr cpointer?)
 
