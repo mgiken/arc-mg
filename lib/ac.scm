@@ -704,6 +704,8 @@
       '()
       (cons (car l) (ar-nil-terminate (cdr l)))))
 
+(xdef ar-nil-terminate ar-nil-terminate)
+
 ; turn the arguments to Arc apply into a list.
 ; if you call (apply fn 1 2 '(3 4))
 ; then args is '(1 2 (3 4 . nil) . ())

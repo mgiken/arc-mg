@@ -6,10 +6,10 @@
   (if finalizer
       (w/uniq (cfun res)
         `(= ,name (fn args 
-                    (let ,res (apply (get-ffi-obj ,cname ffi (cfn (to-prop:list ,@in-types) ,out-type)) args)
+                    (let ,res (apply (get-ffi-obj ,cname ffi (cfn (ar-nil-terminate:list ,@in-types) ,out-type)) args)
                          (cfinalize ,res ,finalizer)
                          ,res))))
-      `(= ,name (get-ffi-obj ,cname ffi (cfn (to-prop:list ,@in-types) ,out-type)))))
+      `(= ,name (get-ffi-obj ,cname ffi (cfn (ar-nil-terminate:list ,@in-types) ,out-type)))))
 
 
 (mac w/ffi (name . body) ; catches ffi
