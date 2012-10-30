@@ -1425,13 +1425,21 @@
 
 (xdef memory current-memory-use)
 
-(xdef declare (lambda (key val)
-                (let ((flag (not (ar-false? val))))
-                  (case key
-                    ((atstrings)      (set! atstrings      flag))
-                    ((direct-calls)   (set! direct-calls   flag))
-                    ((explicit-flush) (set! explicit-flush flag)))
-                  val)))
+(define ar-declarations (make-hash-table))
+
+(define (ar-bflag key)
+  (not (ar-false? (hash-table-get ar-declarations key 'nil))))
+
+(xdef declarations* ar-declarations)
+
+
+;(xdef declare (lambda (key val)
+;                (let ((flag (not (ar-false? val))))
+;                  (case key
+;                    ((atstrings)      (set! atstrings      flag))
+;                    ((direct-calls)   (set! direct-calls   flag))
+;                    ((explicit-flush) (set! explicit-flush flag)))
+;                  val)))
 
 (putenv "TZ" ":GMT")
 
