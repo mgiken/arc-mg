@@ -20,8 +20,5 @@
         (push e failed)))
     (list rev.passed rev.failed)))
 
-(def upcase1 (s)
-  (string (upcase s.0) (cut s 1)))
-
 (mac qw args
   `(list ,@(map [string _] args)))
