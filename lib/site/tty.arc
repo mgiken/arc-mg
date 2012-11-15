@@ -1,6 +1,14 @@
+(= tty-reset* "\e[00m")
+
+(def pr-reset ()
+  (pr tty-reset*))
+
 (mac deftty-color (name code value)
-  `(def ,(sym:string "tty-" name) args
-     (string ,(string "\e[" code ";" value "m") args "\e[00m")))
+  `(do (= ,(sym:string "tty-" name "*") (+ "\e[" ";" ,value "m"))
+       (def ,(sym:string "pr-" name) ()
+         (pr ,(sym:string "tty-" name "*")))
+       (def ,(sym:string name "-string") args
+         (string ,(sym:string "tty-" name "*") args tty-reset*))))
 
 (map [eval `(deftty-color ,@_)] '(
   (black        0 30)
