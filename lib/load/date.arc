@@ -1,5 +1,6 @@
 (require "load/redef.arc")
 (require "load/scheme.arc")
+(require "re.arc")
 
 (scheme:require srfi/19)
 
@@ -11,7 +12,9 @@
 
 (redef datestring ((o s (seconds)) (o fmt "~Y-~m-~d"))
   (let d date.s
-    (scheme:date->string d fmt)))
+    (if (is fmt 'rfc3339)
+        (re-replace "(\\d{2})(\\d{2})$" (scheme:date->string d "~4") "\\1:\\2")
+        (scheme:date->string d fmt))))
 
 (redef seconds ((o datestr) (o fmt "~Y-~m-~d"))
   (if datestr

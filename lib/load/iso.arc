@@ -25,3 +25,6 @@
   (and (isa x 'exception)
        (isa y 'exception))
        (is details.x details.y))
+
+(defmethod iso (x y) re
+  (scheme:equal? x y))
